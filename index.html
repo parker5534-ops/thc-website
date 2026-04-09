@@ -552,20 +552,85 @@
   }
   .fade-up.visible { opacity: 1; transform: none; }
 
-  /* ── RESPONSIVE ── */
+  /* ── RESPONSIVE — TABLET ── */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .about-grid, .exp-grid, .rules-layout { grid-template-columns: 1fr; }
-    .about-visual { margin: 0 auto; }
-    .why-grid { grid-template-columns: 1fr; }
-    .exp-list { flex-direction: row; flex-wrap: wrap; }
-    .exp-tab { font-size: 0.85rem; padding: 10px 14px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual { margin: 0 auto; max-width: 280px; }
+    .about-logo-large { width: 200px; height: 200px; font-size: 3.5rem; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .exp-list { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+    .exp-tab { font-size: 0.82rem; padding: 8px 12px; }
+    .rules-layout { grid-template-columns: 1fr; }
   }
+
+  /* ── RESPONSIVE — MOBILE ── */
   @media (max-width: 600px) {
-    section { padding: 70px 5vw; }
-    .hero-stats { gap: 1.5rem; }
-    footer { flex-direction: column; align-items: flex-start; }
+    section { padding: 60px 6vw; }
+
+    /* Nav */
+    nav { padding: 0 6vw; height: 60px; }
+
+    /* Hero */
+    #hero { padding: 100px 6vw 70px; }
+    .hero-stats {
+      gap: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat { padding: 0.5rem 0; }
+    .stat-num { font-size: 1.4rem; }
+    .hero-ctas { flex-direction: column; align-items: stretch; }
+    .btn-primary, .btn-secondary { justify-content: center; width: 100%; }
+
+    /* About */
+    .about-visual { max-width: 220px; }
+    .about-logo-large { width: 160px; height: 160px; font-size: 2.8rem; }
+    .about-pills { gap: 6px; }
+    .pill { font-size: 11px; padding: 4px 11px; }
+
+    /* Features */
+    .features-grid { grid-template-columns: 1fr; }
+
+    /* How it works — stack the two-col grid */
+    #how .max-w { grid-template-columns: 1fr !important; gap: 2.5rem; }
+
+    /* Experience */
+    .exp-list { flex-direction: column; }
+    .exp-tab { width: 100%; }
+    .exp-panel-inner { padding: 1.5rem; }
+    .exp-tags { gap: 6px; }
+    .exp-tag { font-size: 11px; }
+
+    /* Why Join */
+    .why-grid { grid-template-columns: 1fr; }
+    .why-num { font-size: 2rem; }
+
+    /* Rules */
+    .rules-layout { gap: 2rem; }
+    .rule-item { padding: 0.85rem 1rem; }
+
+    /* FAQ */
+    .faq-q { font-size: 0.9rem; }
+
+    /* CTA */
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .cta-btns .btn-primary,
+    .cta-btns .btn-secondary { justify-content: center; width: 100%; }
+    .topgg-wrapper { padding: 0 1rem; }
+    .topgg-widget { width: 100%; }
+    .topgg-widget img { width: 100%; }
+
+    /* Footer */
+    footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 11px; }
   }
 </style>
 </head>
