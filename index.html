@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>T!H$C — The Houston Clutchers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0b;
+    --charcoal: #111114;
+    --surface: #16161a;
+    --surface-2: #1c1c22;
+    --surface-3: #232329;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --white: #f0eee8;
+    --white-muted: rgba(240,238,232,0.55);
+    --white-dim: rgba(240,238,232,0.3);
+    --purple: #7c5cbf;
+    --purple-light: #9b7fd4;
+    --purple-glow: rgba(124,92,191,0.18);
+    --purple-glow-strong: rgba(124,92,191,0.35);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--purple-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--white-muted); text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--purple);
+    color: var(--white) !important;
+    padding: 8px 20px !important;
+    border-radius: 6px;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--purple-light) !important; color: var(--white) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--white); display: block; transition: all 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(124,92,191,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 80%, rgba(124,92,191,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0a0b 0%, #0e0d13 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 80%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 820px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--purple-light);
+    border: 1px solid rgba(124,92,191,0.35);
+    padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 2rem;
+    background: rgba(124,92,191,0.08);
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  h1 .accent { color: var(--purple-light); }
+  h1 .sub-name {
+    display: block;
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--white-muted);
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+  }
+  .hero-tagline {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--white-muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--purple);
+    color: var(--white);
+    font-family: var(--font-display); font-weight: 700; font-size: 14px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 14px 32px; border-radius: 6px;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 0 30px rgba(124,92,191,0.25);
+  }
+  .btn-primary:hover {
+    background: var(--purple-light);
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(124,92,191,0.4);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 14px 32px; border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid var(--border-hover);
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(124,92,191,0.5);
+    background: var(--purple-glow);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; justify-content: center;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 800;
+    color: var(--white); display: block;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-muted); }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--white-dim);
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--purple-light), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 100px 5vw; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--purple-light);
+    margin-bottom: 1rem; display: block;
+  }
+  h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--white-muted);
+    max-width: 540px; line-height: 1.8; font-weight: 300;
+    margin-bottom: 3rem;
+  }
+  .max-w { max-width: 1200px; margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--charcoal); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-visual {
+    position: relative; aspect-ratio: 1/1; max-width: 420px;
+  }
+  .about-glow-ring {
+    position: absolute; inset: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(124,92,191,0.2);
+  }
+  .about-glow-ring::before {
+    content: '';
+    position: absolute; inset: 15px;
+    border-radius: 50%;
+    border: 1px solid rgba(124,92,191,0.12);
+  }
+  .about-center {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-logo-large {
+    font-family: var(--font-display); font-size: 5rem; font-weight: 800;
+    color: var(--white);
+    background: radial-gradient(circle at 50% 50%, var(--surface-3), var(--surface));
+    border: 1px solid var(--border-hover);
+    border-radius: 50%;
+    width: 280px; height: 280px;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: -0.02em;
+    box-shadow: 0 0 80px rgba(124,92,191,0.2);
+  }
+  .about-logo-large span { color: var(--purple-light); }
+  .about-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+  .pill {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--purple-light);
+    border: 1px solid rgba(124,92,191,0.3);
+    background: rgba(124,92,191,0.08);
+    padding: 5px 14px; border-radius: 100px;
+  }
+
+  /* ── FEATURES ── */
+  #features { background: var(--black); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .feature-card {
+    background: var(--charcoal);
+    padding: 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple-glow-strong), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .feature-card:hover { background: var(--surface); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    width: 44px; height: 44px;
+    background: var(--purple-glow);
+    border: 1px solid rgba(124,92,191,0.25);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 20px;
+  }
+  .feature-card h3 {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.02em; margin-bottom: 0.5rem; color: var(--white);
+  }
+  .feature-card p { font-size: 0.9rem; color: var(--white-muted); line-height: 1.7; }
+
+  /* ── HOW IT WORKS ── */
+  #how { background: var(--charcoal); }
+  .steps { display: flex; flex-direction: column; gap: 0; max-width: 640px; }
+  .step {
+    display: flex; gap: 2rem; align-items: flex-start;
+    position: relative; padding-bottom: 2.5rem;
+  }
+  .step:last-child { padding-bottom: 0; }
+  .step-line {
+    position: absolute; left: 19px; top: 44px; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, rgba(124,92,191,0.4), transparent);
+  }
+  .step:last-child .step-line { display: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid rgba(124,92,191,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 14px; font-weight: 800;
+    color: var(--purple-light);
+  }
+  .step-content h3 {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.4rem; color: var(--white);
+  }
+  .step-content p { font-size: 0.9rem; color: var(--white-muted); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--black); }
+  .exp-grid {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start;
+  }
+  .exp-list { display: flex; flex-direction: column; gap: 4px; }
+  .exp-tab {
+    padding: 14px 20px; border-radius: 8px;
+    cursor: pointer; transition: all 0.2s;
+    border: 1px solid transparent;
+    font-weight: 500; font-size: 0.95rem; color: var(--white-muted);
+  }
+  .exp-tab:hover { color: var(--white); background: var(--surface-2); }
+  .exp-tab.active {
+    color: var(--white);
+    background: var(--surface-2);
+    border-color: rgba(124,92,191,0.3);
+    border-left-color: var(--purple-light);
+    border-left-width: 2px;
+  }
+  .exp-panels { }
+  .exp-panel { display: none; }
+  .exp-panel.active { display: block; }
+  .exp-panel-inner {
+    background: var(--surface);
+    border: 1px solid var(--border-hover);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+  .exp-panel h3 {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+    margin-bottom: 0.75rem; color: var(--white);
+  }
+  .exp-panel p { color: var(--white-muted); margin-bottom: 1.5rem; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .exp-tag {
+    font-size: 12px; font-weight: 500;
+    color: var(--white-muted);
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── WHY JOIN ── */
+  #why { background: var(--charcoal); }
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .why-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .why-card:hover { border-color: rgba(124,92,191,0.35); transform: translateY(-3px); }
+  .why-num {
+    font-family: var(--font-display); font-size: 3rem; font-weight: 800;
+    color: rgba(124,92,191,0.2); line-height: 1; margin-bottom: 0.75rem;
+    display: block;
+  }
+  .why-card h3 {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.5rem; color: var(--white);
+  }
+  .why-card p { font-size: 0.9rem; color: var(--white-muted); }
+
+  /* ── RULES ── */
+  #rules { background: var(--black); }
+  .rules-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .rules-list { display: flex; flex-direction: column; gap: 1px; }
+  .rule-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+  .rule-item:hover { border-color: rgba(124,92,191,0.3); }
+  .rule-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-light); flex-shrink: 0;
+  }
+  .rule-text { font-size: 0.95rem; color: var(--white-muted); }
+  .rule-text strong { color: var(--white); font-weight: 500; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--charcoal); }
+  .faq-list { max-width: 720px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 0; gap: 1rem;
+    font-family: var(--font-body); font-size: 1rem; font-weight: 500;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--purple-light); }
+  .faq-icon {
+    flex-shrink: 0; width: 20px; height: 20px;
+    border: 1px solid var(--border-hover); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; color: var(--white-muted); font-size: 14px;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--purple-glow); border-color: rgba(124,92,191,0.4);
+    color: var(--purple-light); transform: rotate(45deg);
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s ease;
+  }
+  .faq-a-inner { padding-bottom: 1.25rem; font-size: 0.95rem; color: var(--white-muted); line-height: 1.8; }
+  .faq-item.open .faq-a { max-height: 300px; }
+
+  /* ── FINAL CTA ── */
+  #cta {
+    background: var(--black);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-glow {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(124,92,191,0.2), transparent 70%);
+  }
+  .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  #cta h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+  #cta .section-sub { margin: 0 auto 2.5rem; max-width: 480px; text-align: center; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── TOP.GG WIDGET ── */
+  .topgg-wrapper {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 2.5rem;
+  }
+  .topgg-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--white-dim);
+    margin-bottom: 12px;
+  }
+  .topgg-widget {
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(124,92,191,0.25);
+    box-shadow: 0 0 30px rgba(124,92,191,0.15);
+    transition: box-shadow 0.3s, transform 0.2s;
+    line-height: 0;
+  }
+  .topgg-widget:hover {
+    box-shadow: 0 0 50px rgba(124,92,191,0.3);
+    transform: translateY(-2px);
+  }
+  .topgg-widget img { display: block; max-width: 100%; height: auto; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 16px; font-weight: 800;
+    color: var(--white); text-decoration: none;
+  }
+  .footer-logo span { color: var(--purple-light); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 13px; color: var(--white-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--purple-light); }
+  .footer-copy { font-size: 12px; color: var(--white-dim); }
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(10,10,11,0.98);
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    backdrop-filter: blur(20px);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--purple-light); }
+  .mobile-close {
+    position: absolute; top: 22px; right: 5vw;
+    background: none; border: none; color: var(--white);
+    font-size: 1.5rem; cursor: pointer;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid, .exp-grid, .rules-layout { grid-template-columns: 1fr; }
+    .about-visual { margin: 0 auto; }
+    .why-grid { grid-template-columns: 1fr; }
+    .exp-list { flex-direction: row; flex-wrap: wrap; }
+    .exp-tab { font-size: 0.85rem; padding: 10px 14px; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5vw; }
+    .hero-stats { gap: 1.5rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">T<span>!</span>H<span>$</span>C</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://top.gg/discord/servers/784147911148965888/vote" target="_blank" rel="noopener">Vote ↑</a></li>
+    <li><a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener" class="nav-cta">Join Discord</a></li>
+  </ul>
+  <div class="hamburger" id="hamburgerBtn">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu">✕</button>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#features" onclick="closeMobileMenu()">Features</a>
+  <a href="#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="https://top.gg/discord/servers/784147911148965888/vote" target="_blank" rel="noopener" style="color: var(--white-muted);">Vote on Top.gg ↑</a>
+  <a href="https://www.tiktok.com/@thehoustonclutchers?_r=1&_t=ZT-95O49nXnthV" target="_blank" rel="noopener" style="color: var(--white-muted);">TikTok ↗</a>
+  <a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener" style="color: var(--purple-light);">Join Discord ↗</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade-up">
+    <div class="hero-eyebrow">Houston's Premier Gaming Community</div>
+    <h1>
+      T<span class="accent">!</span>H<span class="accent">$</span>C
+      <span class="sub-name">The Houston Clutchers</span>
+    </h1>
+    <p class="hero-tagline">
+      More than a Discord server. A space built for gamers who actually connect — squad up, hang out, and find your people.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="18" height="14" viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M60.1 4.9C55.6 2.8 50.8 1.3 45.8.5c-.6 1.1-1.3 2.5-1.7 3.6-5.3-.8-10.6-.8-15.8 0-.5-1.1-1.2-2.5-1.8-3.6C21.4 1.3 16.6 2.8 12 4.9 2.2 19.4-.7 33.5.2 47.3c6.2 4.6 12.2 7.4 18.1 9.2 1.5-2 2.8-4.2 3.9-6.5-2.1-.8-4.1-1.8-6-2.9.5-.4 1-.7 1.5-1.1 11.5 5.4 24 5.4 35.3 0 .5.4 1 .7 1.5 1.1-1.9 1.2-4 2.1-6.1 2.9 1.1 2.3 2.4 4.5 3.9 6.5 5.9-1.8 11.9-4.6 18.1-9.2 1.1-16.1-2.3-30.1-9.3-42.4zM23.7 38.8c-3.4 0-6.2-3.1-6.2-7s2.7-7 6.2-7 6.3 3.1 6.2 7-2.7 7-6.2 7zm23.6 0c-3.4 0-6.2-3.1-6.2-7s2.7-7 6.2-7 6.3 3.1 6.2 7-2.7 7-6.2 7z"/></svg>
+        Join Discord
+      </a>
+      <a href="#about" class="btn-secondary">Explore the Community →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2020</span>
+        <span class="stat-label">Founded</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">Active</span>
+        <span class="stat-label">Community</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Voice Chats</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">HTX</span>
+        <span class="stat-label">Roots</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w about-grid">
+    <div class="about-visual fade-up">
+      <div class="about-glow-ring"></div>
+      <div class="about-center">
+        <div class="about-logo-large">T<span>!</span>H<span>$</span>C</div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <span class="section-label">About the Community</span>
+      <h2>Gaming-first.<br>Community always.</h2>
+      <p class="section-sub">
+        T!H$C started as a squad. It grew into something more — a place where you actually want to log on, not just to game, but to talk, vibe, and connect with people who get it.
+      </p>
+      <p style="color: var(--white-muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2rem;">
+        Built in Houston, expanded to Discord in 2024. We focus on real community — not just a list of channels with nobody in them. Every space in T!H$C has a purpose, and every member has a place. Whether you're here to grind ranked, find a squad, or just hang out in voice with good people — this is your spot.
+      </p>
+      <div class="about-pills">
+        <span class="pill">Gaming</span>
+        <span class="pill">Community</span>
+        <span class="pill">Houston Roots</span>
+        <span class="pill">Lifestyle</span>
+        <span class="pill">Organized</span>
+        <span class="pill">Premium Feel</span>
+        <span class="pill">Welcoming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="max-w">
+    <span class="section-label fade-up">What's Inside</span>
+    <h2 class="fade-up">Built different.<br>On purpose.</h2>
+    <p class="section-sub fade-up">Every channel, every role, every voice room was set up with a reason. No dead spaces, no clutter.</p>
+    <div class="features-grid fade-up">
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Game-Specific Channels</h3>
+        <p>Dedicated spaces for the titles you actually play. Talk strats, find teammates, share clips — all in the right room.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏷️</div>
+        <h3>Role-Based Access</h3>
+        <p>Pick your roles, unlock your channels. The server adapts to you — not the other way around.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>General Chat & Hangout</h3>
+        <p>Chill conversation, memes, life updates — the social core of the server. Always something going on.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>Always-On Voice Chats</h3>
+        <p>Permanent lounges for when you just want to hang. Drop in, don't even have to talk — just vibe.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Squad-Up Rooms</h3>
+        <p>Temporary voice channels created on demand when you're ready to run games. No waste, just play.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Progression & Leveling</h3>
+        <p>Stay active, level up, unlock perks. The more you engage, the more the server gives back.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3>Organized Structure</h3>
+        <p>Sections that make sense. You'll never wonder where to post or who to talk to.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌙</div>
+        <h3>Late-Night Culture</h3>
+        <p>Active when other servers are dead. We run when the night does — this is a real community, not 9-to-5.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Community Events</h3>
+        <p>Tournaments, game nights, challenges — regular reasons to show up and compete together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="max-w" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+    <div class="fade-up">
+      <span class="section-label">Getting Started</span>
+      <h2>You'll be in your lane in under 5 minutes.</h2>
+      <p class="section-sub">The onboarding is clean. No hoops, no confusion.</p>
+    </div>
+    <div class="steps fade-up">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>Join the Server</h3>
+          <p>Click the link. Land in the welcome area. First impressions are already different here.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>Verify Your Account</h3>
+          <p>Quick verification keeps the server clean and the community real. Takes seconds.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>Pick Your Roles</h3>
+          <p>Choose the games you play, your vibe, your interests. The server builds itself around you.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>Unlock Your Channels</h3>
+          <p>Your roles open up the spaces that matter to you. Everything's clean and intentional.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>Connect, Chat & Play</h3>
+          <p>You're in. Say hey in general, hop in voice, find a squad. Welcome to T!H$C.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="max-w">
+    <span class="section-label fade-up">The Experience</span>
+    <h2 class="fade-up">What members actually do here.</h2>
+    <p class="section-sub fade-up">Here's a real look at what your time in T!H$C looks like.</p>
+    <div class="exp-grid fade-up">
+      <div class="exp-list" id="expTabs">
+        <div class="exp-tab active" data-panel="0">💬 General Hangout</div>
+        <div class="exp-tab" data-panel="1">🎮 Find a Squad</div>
+        <div class="exp-tab" data-panel="2">🎙️ Voice Lounges</div>
+        <div class="exp-tab" data-panel="3">🏆 Game-Specific Spaces</div>
+        <div class="exp-tab" data-panel="4">📣 Community Life</div>
+      </div>
+      <div class="exp-panels" id="expPanels">
+        <div class="exp-panel active">
+          <div class="exp-panel-inner">
+            <h3>General Hangout</h3>
+            <p>This is where the server lives. General chat is the heartbeat — talk about anything, share something funny, drop your hot take on the latest game. The conversation actually flows here because the community is real.</p>
+            <div class="exp-tags"><span class="exp-tag">#general</span><span class="exp-tag">#memes</span><span class="exp-tag">#off-topic</span><span class="exp-tag">#media-share</span></div>
+          </div>
+        </div>
+        <div class="exp-panel">
+          <div class="exp-panel-inner">
+            <h3>Find a Squad</h3>
+            <p>LFG is actually useful here. Whether you're tryna run ranked or just want someone to grind with, there are always people looking. Post up, jump in voice, lock in.</p>
+            <div class="exp-tags"><span class="exp-tag">#lfg</span><span class="exp-tag">#squad-up</span><span class="exp-tag">Squad Voice Rooms</span><span class="exp-tag">Role Pings</span></div>
+          </div>
+        </div>
+        <div class="exp-panel">
+          <div class="exp-panel-inner">
+            <h3>Voice Lounges</h3>
+            <p>Drop into the lounge when you're online. You don't have to be doing anything. Some of the best moments in the server happen when people are just present — playing their own game, talking randomly, vibing out.</p>
+            <div class="exp-tags"><span class="exp-tag">Main Lounge</span><span class="exp-tag">Chill Zone</span><span class="exp-tag">Late Night VC</span><span class="exp-tag">Temp Rooms</span></div>
+          </div>
+        </div>
+        <div class="exp-panel">
+          <div class="exp-panel-inner">
+            <h3>Game-Specific Spaces</h3>
+            <p>Each major title gets its own section. Dedicated channels for discussion, clips, tips, and LFG. You stay in your lane and still feel part of the bigger server.</p>
+            <div class="exp-tags"><span class="exp-tag">Valorant</span><span class="exp-tag">Warzone</span><span class="exp-tag">NBA 2K</span><span class="exp-tag">Fortnite</span><span class="exp-tag">+ More</span></div>
+          </div>
+        </div>
+        <div class="exp-panel">
+          <div class="exp-panel-inner">
+            <h3>Community Life</h3>
+            <p>Announcements, events, milestones, polls. The server has a pulse. Leadership stays communicative and the culture is built by everyone here, not just mods running a rulebook.</p>
+            <div class="exp-tags"><span class="exp-tag">Announcements</span><span class="exp-tag">Events</span><span class="exp-tag">Polls</span><span class="exp-tag">Server News</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY JOIN -->
+<section id="why">
+  <div class="max-w">
+    <span class="section-label fade-up">Why T!H$C</span>
+    <h2 class="fade-up">Not just another Discord.</h2>
+    <p class="section-sub fade-up">Most servers are empty hallways. This one's an actual room full of people.</p>
+    <div class="why-grid fade-up">
+      <div class="why-card">
+        <span class="why-num">01</span>
+        <h3>Built for Real People</h3>
+        <p>No fake hype, no bots padding member counts. T!H$C is a real community that was built slow and built right — and it shows in how people actually talk here.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">02</span>
+        <h3>Gaming Meets Lifestyle</h3>
+        <p>You don't have to choose between gaming talk and general conversation. This server has both — and they coexist without one killing the other's energy.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">03</span>
+        <h3>Structured but Not Stiff</h3>
+        <p>Organization doesn't have to mean corporate. The server runs clean and intentional, but the culture is loose, welcoming, and easy to slide into.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">04</span>
+        <h3>Houston Energy</h3>
+        <p>Started in H-Town, always carried that vibe. Laid back but locked in. Welcoming but with standards. That's what T!H$C is — and it translates wherever you're logging in from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules">
+  <div class="max-w rules-layout">
+    <div class="fade-up">
+      <span class="section-label">Community Standards</span>
+      <h2>The vibe is protected here.</h2>
+      <p class="section-sub">We don't run a long rulebook. We run a short, real one — and people actually follow it because the culture makes sense.</p>
+      <a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener" class="btn-secondary" style="margin-top: 1rem;">See Full Rules in Server →</a>
+    </div>
+    <div class="rules-list fade-up">
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>Respect everyone.</strong> This is non-negotiable. Doesn't matter who they are.</div></div>
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>No spam or flooding.</strong> Keep channels clean. One message does the job.</div></div>
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>No unnecessary drama.</strong> Beef outside the server stays outside. We don't host it.</div></div>
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>Use channels correctly.</strong> Right content in the right space. It's all labeled for a reason.</div></div>
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>Keep the vibe right.</strong> You know what that means. Act like you belong here.</div></div>
+      <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>No self-promotion without permission.</strong> Ask before you drop links or invites.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="max-w">
+    <span class="section-label fade-up">FAQ</span>
+    <h2 class="fade-up">Questions answered.<br>Before you even ask.</h2>
+    <div class="faq-list fade-up" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Is T!H$C open to everyone?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — T!H$C is open to anyone who respects the community and wants to be part of something real. You don't have to be from Houston. The roots are there, but the doors are wide open.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What games are played here?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">The server covers a wide range — from Valorant and Warzone to NBA 2K and Fortnite, with more being added based on what the community actually plays. If it's popular, there's likely a space for it.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I have to be a hardcore gamer to join?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Not at all. Gaming is the focus, but the server is also about community and lifestyle. Casual players, people who just want to hang out in VC, and people who talk more than they game are all welcome.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How active is the server?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">T!H$C is an active, growing community. You'll find people in general chat and voice throughout the day — especially evenings and late nights when the activity peaks.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is there staff or moderation?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. The server is led by the four founders and has a moderation team in place to keep things running well. The goal is a light hand with a clear set of standards — not heavy policing.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What happens after I join?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">You'll land in the welcome area, go through a quick verification, and then get to pick your roles to unlock the channels that fit you. After that — just show up. Introduce yourself, hop in voice, and see what the server's about.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-content fade-up">
+    <span class="section-label" style="display: block; margin-bottom: 1rem;">Ready to Join?</span>
+    <h2>Your squad is already in here.</h2>
+    <p class="section-sub">Stop lurking. Stop looking for a Discord worth being in. This is it. Come as you are, and find your people.</p>
+    <div class="topgg-wrapper">
+      <span class="topgg-label">Verified on Top.gg</span>
+      <a class="topgg-widget" href="https://top.gg/discord/servers/784147911148965888" target="_blank" rel="noopener">
+        <img src="https://top.gg/api/v1/widgets/large/784147911148965888" alt="T!H$C on Top.gg" />
+      </a>
+    </div>
+    <div class="cta-btns">
+      <a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="18" height="14" viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M60.1 4.9C55.6 2.8 50.8 1.3 45.8.5c-.6 1.1-1.3 2.5-1.7 3.6-5.3-.8-10.6-.8-15.8 0-.5-1.1-1.2-2.5-1.8-3.6C21.4 1.3 16.6 2.8 12 4.9 2.2 19.4-.7 33.5.2 47.3c6.2 4.6 12.2 7.4 18.1 9.2 1.5-2 2.8-4.2 3.9-6.5-2.1-.8-4.1-1.8-6-2.9.5-.4 1-.7 1.5-1.1 11.5 5.4 24 5.4 35.3 0 .5.4 1 .7 1.5 1.1-1.9 1.2-4 2.1-6.1 2.9 1.1 2.3 2.4 4.5 3.9 6.5 5.9-1.8 11.9-4.6 18.1-9.2 1.1-16.1-2.3-30.1-9.3-42.4zM23.7 38.8c-3.4 0-6.2-3.1-6.2-7s2.7-7 6.2-7 6.3 3.1 6.2 7-2.7 7-6.2 7zm23.6 0c-3.4 0-6.2-3.1-6.2-7s2.7-7 6.2-7 6.3 3.1 6.2 7-2.7 7-6.2 7z"/></svg>
+        Join the Server
+      </a>
+      <a href="https://top.gg/discord/servers/784147911148965888/vote" target="_blank" rel="noopener" class="btn-secondary">Vote on Top.gg ↑</a>
+      <a href="#about" class="btn-secondary">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="footer-logo">T<span>!</span>H<span>$</span>C — The Houston Clutchers</a>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#rules">Rules</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://top.gg/discord/servers/784147911148965888/vote" target="_blank" rel="noopener">Vote ↑</a>
+    <a href="https://www.tiktok.com/@thehoustonclutchers?_r=1&_t=ZT-95O49nXnthV" target="_blank" rel="noopener">TikTok ↗</a>
+    <a href="https://discord.gg/SVunWsfj76" target="_blank" rel="noopener">Discord ↗</a>
+  </div>
+  <div class="footer-copy">© 2024 T!H$C — The Houston Clutchers. All rights reserved.</div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('hamburgerBtn').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('closeMenu').addEventListener('click', closeMobileMenu);
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Experience Tabs
+  document.querySelectorAll('.exp-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const idx = tab.dataset.panel;
+      document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.exp-panel')[idx].classList.add('active');
+    });
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // How-it-works responsive
+  function checkHowGrid() {
+    const how = document.querySelector('#how .max-w');
+    if (how) how.style.gridTemplateColumns = window.innerWidth < 900 ? '1fr' : '1fr 1fr';
+  }
+  window.addEventListener('resize', checkHowGrid);
+  checkHowGrid();
+</script>
+</body>
+</html>
